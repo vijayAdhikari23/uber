@@ -6,7 +6,7 @@
 
 Register a new user in the system.
 
-#### HTTPP Method
+#### HTTP Method
 
 `POST`
 
@@ -55,6 +55,65 @@ Register a new user in the system.
   "message": "Username already exists",
   "errors": {
     "username": ["This username is already taken"]
+  }
+}
+```
+
+## API Endpoints
+
+### Login User
+
+`POST /users/login`
+
+Authenticates a user and returns a JWT token and user details.
+
+#### Request Body
+
+```json
+{
+  "email": "user@example.com",
+  "password": "yourpassword"
+}
+```
+
+#### Response
+
+**Success (200 OK)**
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+    }
+    "email": "user@example.com",
+    "password": "hashed_password"
+  }
+}
+```
+
+**Error (401 Unauthorized)**
+
+```json
+{
+  "error": "Invalid email or password"
+}
+```
+
+#### Example Usage
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+    }
+    "email": "user@example.com",
+    "password": "hashed_password"
   }
 }
 ```
