@@ -117,3 +117,69 @@ Authenticates a user and returns a JWT token and user details.
   }
 }
 ```
+
+# API Documentation
+
+## User Endpoints
+
+### Get User Profile
+
+`GET /users/profile`
+
+Retrieves the currently authenticated user's profile information.
+
+#### Authentication
+
+- Requires valid JWT token in Authorization header
+
+#### Response
+
+**200 OK**
+
+```json
+{
+  "id": "string",
+  "username": "string",
+  "email": "string"
+}
+```
+
+**401 Unauthorized**
+
+```json
+{
+  "error": "Invalid or missing authentication token"
+}
+```
+
+### Logout User
+
+`POST /users/logout`
+
+Logs out the currently authenticated user by invalidating their session token and blacklisting the token provided in cookie or headers.
+
+### HTTP Method
+
+`GET`
+
+#### Authentication
+
+- Requires valid JWT token in Authorization header or cookie
+
+#### Response
+
+**200 OK**
+
+```json
+{
+  "message": "Successfully logged out"
+}
+```
+
+**401 Unauthorized**
+
+```json
+{
+  "error": "Invalid or missing authentication token"
+}
+```
