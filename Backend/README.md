@@ -183,3 +183,46 @@ Logs out the currently authenticated user by invalidating their session token an
   "error": "Invalid or missing authentication token"
 }
 ```
+
+# Captain Routes Documentation
+
+This document outlines the available API routes for the Captain service.
+
+## Overview
+
+The Captain service provides endpoints for managing captain-related operations such as authentication, profile management, and trip management.
+
+## Authentication Routes
+
+### Register Captain
+
+```
+POST /api/captains/register
+```
+
+**Request Body:**
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "phone": "1234567890",
+  "licenseNumber": "DL12345678"
+}
+```
+
+**Response:**
+
+```json
+{
+  "success": true,
+  "message": "Captain registered successfully",
+  "data": {
+    "id": "captain_id",
+    "name": "John Doe",
+    "email": "john@example.com"
+  },
+  "token": "jwt_token"
+}
+```
