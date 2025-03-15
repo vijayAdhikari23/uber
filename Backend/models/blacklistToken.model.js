@@ -12,5 +12,6 @@ const blacklistTokenSchema = new mongoose.Schema({
     expires: 86400, // 24 hours in a second
   },
 });
+delete mongoose.models.BlacklistToken;
 
 module.exports = mongoose.model("BlacklistToken", blacklistTokenSchema);

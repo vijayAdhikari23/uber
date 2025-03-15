@@ -226,3 +226,217 @@ POST /api/captains/register
   "token": "jwt_token"
 }
 ```
+
+# Captain Routes Documentation
+
+This document outlines the available API routes for the Captain service.
+
+## Overview
+
+The Captain service provides endpoints for managing captain-related operations such as authentication, profile management, and trip management.
+
+## Authentication Routes
+
+### Register Captain
+
+`POST /api/captains/register`
+
+**Request Body:**
+
+```json
+{
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john@example.com",
+  "password": "password123",
+  "vehicle": {
+    "color": "red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vehicleType": "sedan"
+  }
+}
+```
+
+**Response:**
+
+**Success (201 Created)**
+
+```json
+{
+  "token": "jwt_token",
+  "captain": {
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john@example.com",
+    "vehicle": {
+      "color": "red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "sedan"
+    }
+  }
+}
+```
+
+**Error (400 Bad Request)**
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Fullname is required",
+      "param": "fullname",
+      "location": "body"
+    },
+    {
+      "msg": "Invalid email",
+      "param": "email",
+      "location": "body"
+    },
+    {
+      "msg": "Password must be at least 6 characters long",
+      "param": "password",
+      "location": "body"
+    },
+    {
+      "msg": "Vehicle color is required",
+      "param": "vehicle.color",
+      "location": "body"
+    },
+    {
+      "msg": "Vehicle plate is required",
+      "param": "vehicle.plate",
+      "location": "body"
+    },
+    {
+      "msg": "Vehicle capacity is required",
+      "param": "vehicle.capacity",
+      "location": "body"
+    }
+  ]
+}
+```
+
+### Login Captain
+
+`POST /api/captains/login`
+
+**Request Body:**
+
+```json
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
+```
+
+**Response:**
+
+**Success (200 OK)**
+
+```json
+{
+  "token": "jwt_token",
+  "captain": {
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john@example.com",
+    "vehicle": {
+      "color": "red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "sedan"
+    }
+  }
+}
+```
+
+**Error (400 Bad Request)**
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid email",
+      "param": "email",
+      "location": "body"
+    },
+    {
+      "msg": "Password is required",
+      "param": "password",
+      "location": "body"
+    }
+  ]
+}
+```
+
+### Get Captain Profile
+
+`GET /api/captains/profile`
+
+**Authentication:**
+
+- Requires valid JWT token in Authorization header
+
+**Response:**
+
+**Success (200 OK)**
+
+```json
+{
+  "captain": {
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john@example.com",
+    "vehicle": {
+      "color": "red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "sedan"
+    }
+  }
+}
+```
+
+**Error (401 Unauthorized)**
+
+```json
+{
+  "error": "Invalid or missing authentication token"
+}
+```
+
+### Logout Captain
+
+`POST /api/captains/logout`
+
+**Authentication:**
+
+- Requires valid JWT token in Authorization header or cookie
+
+**Response:**
+
+**Success (200 OK)**
+
+```json
+{
+  "message": "Successfully logged out"
+}
+```
+
+**Error (401 Unauthorized)**
+
+```json
+{
+  "error": "Invalid or missing authentication token"
+}
+```
